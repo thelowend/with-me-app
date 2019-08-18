@@ -7,7 +7,8 @@ import Style from './LoginScreenStyle'
 
 class LoginScreen extends React.Component {
   render() {
-    let loggedIn = this.props.accessToken !== null
+    debugger;
+    let loggedIn = this.props.loggedIn === true
     return (
       <View style={Style.container}>
         <Text style={Style.header}> WithMeApp - Login </Text>
@@ -30,13 +31,13 @@ class LoginScreen extends React.Component {
 }
 
 LoginScreen.propTypes = {
-  accessToken: PropTypes.string,
+  loggedIn: PropTypes.bool,
   onLogin: PropTypes.func,
   onLogout: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
-  accessToken: state.login.accessToken,
+  loggedIn: state.login.loggedIn,
 })
 
 const mapDispatchToProps = (dispatch) => ({
