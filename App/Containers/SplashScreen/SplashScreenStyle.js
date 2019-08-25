@@ -7,15 +7,18 @@ export default StyleSheet.create({
     ...ApplicationStyles.screen.container,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignContent: 'stretch',
     backgroundColor: Colors.primary,
+  },
+  splash: {
+    width: 'auto',
+    height: '33%',
   },
   logo: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 70,
-    width: 70,
-    backgroundColor: 'white',
+    height: 50,
+    width: 50,
   },
 })

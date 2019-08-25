@@ -1,16 +1,12 @@
 import React from 'react'
-import { Platform, Text, View, Button, ActivityIndicator, Image } from 'react-native'
+import { ActivityIndicator, Image } from 'react-native'
+import NavigationService from 'App/Services/NavigationService'
+import { Button, Text, View } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
-import ExampleActions from 'App/Stores/Example/Actions'
-import { liveInEurope } from 'App/Stores/Example/Selectors'
+import UserActions from 'App/Stores/User/Actions'
 import Style from './MainScreenStyle'
 import { Images } from 'App/Theme'
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu.',
-  android: 'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu.',
-})
 
 class MainScreen extends React.Component {
   componentDidMount() {
@@ -23,53 +19,55 @@ class MainScreen extends React.Component {
         {this.props.userIsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
-          <View>
-            <View style={Style.logoContainer}>
-              <Image style={Style.logo} source={Images.logo} resizeMode={'contain'} />
-            </View>
-            <Text style={Style.text}>To get started, edit App.js</Text>
-            <Text style={Style.instructions}>{instructions}</Text>
-            {this.props.userErrorMessage ? (
-              <Text style={Style.error}>{this.props.userErrorMessage}</Text>
-            ) : (
-              <View>
-                <Text style={Style.result}>
-                  {"I'm a fake user, my name is "}
-                  {this.props.user.name}
-                </Text>
-                <Text style={Style.result}>
-                  {this.props.liveInEurope ? 'I live in Europe !' : "I don't live in Europe."}
-                </Text>
+            <View>
+              <View style={Style.logoContainer}>
+                <Image style={Style.logo} source={Images.logo} resizeMode={'contain'} />
               </View>
-            )}
-            <Button onPress={() => this._fetchUser()} title="Refresh" />
-          </View>
-        )}
+              {this.props.userErrorMessage ? (
+                <Text style={Style.error}>{this.props.userErrorMessage}</Text>
+              ) : (
+                  <View>
+                    <Text style={Style.result}>
+                      {"User profile: "}
+                      {this.props.user.user_metadata.profile}
+                    </Text>
+                    {!this.props.user.profile ? (
+                      <View>
+                        <Text style={Style.text}>Please complete your profile!</Text>
+                        <Button onPress={() => NavigationService.navigate('ProfileScreen')}><Text>Complete Profile Now</Text></Button>
+                      </View>
+                    ) : (
+                        <Text style={Style.text}>Welcome!</Text>
+                      )}
+                  </View>
+                )}
+            </View>
+          )}
       </View>
     )
   }
   _fetchUser() {
-    this.props.fetchUser()
+    this.props.fetchUser(this.props.idToken)
   }
 }
 
 MainScreen.propTypes = {
+  idToken: PropTypes.string,
   user: PropTypes.object,
   userIsLoading: PropTypes.bool,
   userErrorMessage: PropTypes.string,
   fetchUser: PropTypes.func,
-  liveInEurope: PropTypes.bool,
 }
 
 const mapStateToProps = (state) => ({
-  user: state.example.user,
-  userIsLoading: state.example.userIsLoading,
-  userErrorMessage: state.example.userErrorMessage,
-  liveInEurope: liveInEurope(state),
+  idToken: state.auth.idToken,
+  user: state.user.user,
+  userIsLoading: state.user.userIsLoading,
+  userErrorMessage: state.user.userErrorMessage,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchUser: () => dispatch(ExampleActions.fetchUser()),
+  fetchUser: (idToken) => dispatch(UserActions.fetchUser(idToken)),
 })
 
 export default connect(

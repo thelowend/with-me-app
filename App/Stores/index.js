@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 import configureStore from './CreateStore'
 import rootSaga from 'App/Sagas'
 import { reducer as ExampleReducer } from './Example/Reducers'
-import { reducer as LoginReducer } from './Login/Reducers'
+import { reducer as UserReducer } from './User/Reducers'
+import { reducer as AuthReducer } from './Auth/Reducers'
 
 export default () => {
   const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ export default () => {
      * @see https://redux.js.org/api-reference/combinereducers
      */
     example: ExampleReducer,
-    login: LoginReducer,
+    user: UserReducer,
+    auth: AuthReducer,
   })
 
   return configureStore(rootReducer, rootSaga)

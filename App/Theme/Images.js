@@ -3,5 +3,6 @@
  */
 
 export default {
-  logo: require('App/Assets/Images/TOM.png'),
+  logo: require('App/Assets/Images/logo1.png'),
+  splash80: require('App/Assets/Images/80sSplash.jpg'),
 }

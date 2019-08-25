@@ -1,18 +1,19 @@
-import { put } from 'redux-saga/effects'
-import ExampleActions from 'App/Stores/Example/Actions'
+import { put, call, delay } from 'redux-saga/effects'
 import NavigationService from 'App/Services/NavigationService'
+import { auth0Service } from 'App/Services/Auth0Service'
+import AuthActions from 'App/Stores/Auth/Actions'
 
 /**
  * The startup saga is the place to define behavior to execute when the application starts.
  */
 export function* startup() {
-  // Dispatch a redux action using `put()`
-  // @see https://redux-saga.js.org/docs/basics/DispatchingActions.html
-  yield put(ExampleActions.fetchUser())
-
-  // Add more operations you need to do at startup here
-  // ...
-
-  // When those operations are finished we redirect to the main screen
-  NavigationService.navigateAndReset('LoginScreen')
+  yield delay(1000)
+  const result = yield call(auth0Service.login)
+  if (result.credentials) {
+    yield put(AuthActions.loginSuccess(result.credentials))
+    NavigationService.navigateAndReset('MainScreen')
+  } else {
+    yield put(AuthActions.loginFailure(result.credentials))
+    NavigationService.navigateAndReset('LoginScreen')
+  }
 }

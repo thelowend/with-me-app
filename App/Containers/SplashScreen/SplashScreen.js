@@ -1,15 +1,13 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import styles from './SplashScreenStyle'
+import { Text, View, Image } from 'react-native'
+import Style from './SplashScreenStyle'
+import { Images } from 'App/Theme'
 
 export default class SplashScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.logo}>
-          {/* You will probably want to insert your logo here */}
-          <Text>WithMe App</Text>
-        </View>
+      <View style={Style.container}>
+        <Image style={Style.splash} source={Images.logo} resizeMode={'contain'} />
       </View>
     )
   }

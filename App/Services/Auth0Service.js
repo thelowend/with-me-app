@@ -1,5 +1,6 @@
 import { Config } from 'App/Config'
 import Auth0 from 'react-native-auth0'
+import jwt from 'jwt-decode'
 
 const auth0 = new Auth0(Config.Auth0)
 
@@ -7,12 +8,12 @@ function login() {
   return new Promise((resolve, reject) => {
     auth0.webAuth
       .authorize({
-        scope: 'openid profile',
+        scope: 'openid profile email',
         audience: 'https://' + Config.Auth0.domain + '/userinfo',
       })
       .then((credentials) => {
-        console.log(credentials)
-        resolve(credentials.accessToken)
+        const user = jwt(credentials.idToken)
+        resolve({ credentials: credentials, user: user })
       })
       .catch((error) => {
         console.log('Log in error: ', error)
@@ -25,8 +26,8 @@ function logout() {
   return new Promise((resolve, reject) => {
     auth0.webAuth
       .clearSession({})
-      .then((success) => {
-        console.log('Log out successful: ', success)
+      .then((callBackURL) => {
+        console.log('Log out successful: ', callBackURL)
         resolve(null)
       })
       .catch((error) => {

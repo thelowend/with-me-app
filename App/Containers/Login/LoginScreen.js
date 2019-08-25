@@ -2,12 +2,11 @@ import React from 'react'
 import { Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
-import LoginActions from 'App/Stores/Login/Actions'
+import AuthActions from 'App/Stores/Auth/Actions'
 import Style from './LoginScreenStyle'
 
 class LoginScreen extends React.Component {
   render() {
-    debugger;
     let loggedIn = this.props.loggedIn === true
     return (
       <View style={Style.container}>
@@ -31,18 +30,19 @@ class LoginScreen extends React.Component {
 }
 
 LoginScreen.propTypes = {
+  accessToken: PropTypes.string,
   loggedIn: PropTypes.bool,
   onLogin: PropTypes.func,
   onLogout: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.login.loggedIn,
+  loggedIn: state.auth.loggedIn,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onLogin: () => dispatch(LoginActions.login()),
-  onLogout: () => dispatch(LoginActions.logout()),
+  onLogin: () => dispatch(AuthActions.login()),
+  onLogout: () => dispatch(AuthActions.logout()),
 })
 
 export default connect(
