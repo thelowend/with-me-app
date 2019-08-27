@@ -1,1 +1,4 @@
 index.js
+index.dev.js
+index.production.js
+index.staging.js
