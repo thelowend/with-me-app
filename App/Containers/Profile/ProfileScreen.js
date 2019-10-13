@@ -3,6 +3,7 @@ import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import Style from './ProfileScreenStyle'
+import UserForm from './UserForm/UserForm'
 
 class ProfileScreen extends React.Component {
   componentDidMount() {}
@@ -10,10 +11,8 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <View style={Style.container}>
-        {this.user.user_metadata.profile === 'seeker' ? (
-          <View>
-            <Text>SEEKER</Text>
-          </View>
+        {this.props.user.user_metadata.role === 'user' ? (
+          <UserForm profile={this.props.user} />
         ) : (
           <View>
             <Text>HELPER</Text>
@@ -32,8 +31,7 @@ const mapStateToProps = (state) => ({
   user: state.user.user,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-})
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(
   mapStateToProps,

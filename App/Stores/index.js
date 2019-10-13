@@ -3,6 +3,7 @@ import configureStore from './CreateStore'
 import rootSaga from 'App/Sagas'
 import { reducer as UserReducer } from './User/Reducers'
 import { reducer as AuthReducer } from './Auth/Reducers'
+import { reducer as ProfileReducer } from './Profile/Reducers'
 
 export default () => {
   const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ export default () => {
      */
     user: UserReducer,
     auth: AuthReducer,
+    profile: ProfileReducer,
   })
 
   return configureStore(rootReducer, rootSaga)

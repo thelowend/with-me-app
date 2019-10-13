@@ -9,11 +9,11 @@ import AuthActions from 'App/Stores/Auth/Actions'
 export function* startup() {
   yield delay(1000)
   const result = yield call(auth0Service.login)
-  if (result.credentials) {
+  if (result && result.credentials) {
     yield put(AuthActions.loginSuccess(result.credentials))
     NavigationService.navigateAndReset('MainScreen')
   } else {
-    yield put(AuthActions.loginFailure(result.credentials))
+    yield put(AuthActions.loginFailure())
     NavigationService.navigateAndReset('LoginScreen')
   }
 }

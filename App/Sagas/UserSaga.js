@@ -11,6 +11,6 @@ export function* fetchUser(payload) {
     yield put(UserActions.fetchUserSuccess(user))
   } else {
     yield put(UserActions.fetchUserFailure('There was an error while fetching user information.'))
-    yield call(AuthActions.logout)
+    yield put(AuthActions.logout())
   }
 }

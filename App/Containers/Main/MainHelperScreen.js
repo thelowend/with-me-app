@@ -7,15 +7,10 @@ import UserActions from 'App/Stores/User/Actions'
 import AuthActions from 'App/Stores/Auth/Actions'
 import Style from './MainScreenStyle'
 import CompleteProfile from '../Popups/CompleteProfile'
-import MainHelperScreen from './MainHelperScreen'
-import MainUserScreen from './MainUserScreen'
 
-class MainScreen extends React.Component {
+class MainHelperScreen extends React.Component {
   componentDidMount() {
     this._fetchUser()
-  }
-  isHelper(profileType) {
-    return profileType === 'helper'
   }
 
   render() {
@@ -30,19 +25,13 @@ class MainScreen extends React.Component {
             ) : (
               <View>
                 <Text style={Style.result}>
-                  {'User profile: '}
+                  {'User type: '}
                   {this.props.user.user_metadata.role}
                 </Text>
-                {this.props.user.user_metadata.profileCompleted ? (
-                  <View>
-                    {this.isHelper(this.props.user.user_metadata.role) ? (
-                      <MainHelperScreen />
-                    ) : (
-                      <MainUserScreen />
-                    )}
-                  </View>
-                ) : (
+                {!this.props.user.role ? (
                   <CompleteProfile />
+                ) : (
+                  <Text style={Style.text}>Welcome!</Text>
                 )}
                 <Button onPress={() => this._onLogout()}>
                   <Text>Log Out</Text>
@@ -62,7 +51,7 @@ class MainScreen extends React.Component {
   }
 }
 
-MainScreen.propTypes = {
+MainHelperScreen.propTypes = {
   idToken: PropTypes.string,
   user: PropTypes.object,
   userIsLoading: PropTypes.bool,
@@ -86,4 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainScreen)
+)(MainHelperScreen)

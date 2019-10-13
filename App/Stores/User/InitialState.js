@@ -1,5 +1,5 @@
 export const INITIAL_STATE = {
   user: {},
-  userIsLoading: false,
+  userIsLoading: true,
   userErrorMessage: null,
 }

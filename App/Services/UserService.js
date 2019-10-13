@@ -3,6 +3,8 @@ import { Config } from 'App/Config'
 import { is, curryN, gte } from 'ramda'
 import jwt from 'jwt-decode'
 
+axios.defaults.withCredentials = true
+
 const isWithin = curryN(3, (min, max, value) => {
   const isNumber = is(Number)
   return isNumber(min) && isNumber(max) && isNumber(value) && gte(value, min) && gte(max, value)
@@ -34,6 +36,24 @@ function fetchUser(idToken) {
     })
 }
 
+function updateProfile(idToken, profile) {
+  debugger;
+  const id = jwt(idToken).sub.split('|')[1]
+  return userApiClient
+    .put(`user/${id}`)
+    .then((response) => {
+      if (in200s(response.status)) {
+        console.log('User: ', response.data)
+        return response.data
+      }
+      return null
+    })
+    .catch((error) => {
+      return error
+    })
+}
+
 export const userService = {
   fetchUser,
+  updateProfile,
 }
