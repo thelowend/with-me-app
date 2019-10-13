@@ -8,24 +8,20 @@ import t from 'tcomb-form-native'
 const Form = t.form.Form
 
 const User = t.struct({
-  email: t.String,
   name: t.String,
   age: t.Number,
-  phoneNumber: t.String,
+  contact_number: t.String,
 })
 
 const options = {
   fields: {
-    email: {
-      error: 'Invalid email',
-    },
     name: {
       error: 'Invalid name',
     },
     age: {
       error: 'Invalid age',
     },
-    phoneNumber: {
+    contact_number: {
       label: 'Phone Number',
     },
   },
@@ -45,7 +41,10 @@ class UserForm extends React.Component {
     const value = this._form.getValue() // use that ref to get the form value
     console.log('value: ', value)
     if (value && this.handleValidation(value)) {
-      this.props.updateProfile(this.props.profile._id, value)
+      this.props.updateProfile(
+        this.props.profile._id,
+        Object.assign(this.props.profile.user_metadata, value)
+      )
     } else {
       console.log('error')
     }
@@ -61,7 +60,7 @@ class UserForm extends React.Component {
             this._form = c
           }}
           options={options}
-          value={this.props.profile}
+          value={this.props.profile.user_metadata}
           onChange={this.onChange.bind(this)}
         />
         <Button title="Submit" onPress={this.handleSubmit.bind(this)} />

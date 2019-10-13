@@ -35,11 +35,9 @@ function fetchUser(idToken) {
       return error
     })
 }
-
-function updateProfile(idToken, profile) {
-  const id = jwt(idToken).sub.split('|')[1]
+function updateProfile(payload) {
   return userApiClient
-    .put(`user/${id}`)
+    .put(`user/${payload.id}`, { user_metadata: payload.profile })
     .then((response) => {
       if (in200s(response.status)) {
         console.log('User: ', response.data)

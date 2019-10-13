@@ -1,9 +1,9 @@
 import { createActions } from 'reduxsauce'
 
 const { Types, Creators } = createActions({
-  updateProfile: ['idToken'],
+  updateProfile: ['id', 'profile'],
   updateProfileLoading: null,
-  updateProfileSuccess: ['user'],
+  updateProfileSuccess: ['profile'],
   updateProfileFailure: ['errorMessage'],
 })
 
