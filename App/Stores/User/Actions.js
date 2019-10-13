@@ -1,6 +1,7 @@
 import { createActions } from 'reduxsauce'
 
 const { Types, Creators } = createActions({
+  updateUserValue: ['user'],
   fetchUser: ['idToken'],
   fetchUserLoading: null,
   fetchUserSuccess: ['user'],

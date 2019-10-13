@@ -64,6 +64,7 @@ class UserForm extends React.Component {
           onChange={this.onChange.bind(this)}
         />
         <Button title="Submit" onPress={this.handleSubmit.bind(this)} />
+        {this.props.profileErrorMessage ? <Text>{this.props.profileErrorMessage}</Text> : null}
       </View>
     )
   }
@@ -72,9 +73,12 @@ class UserForm extends React.Component {
 UserForm.propTypes = {
   profile: PropTypes.object,
   updateProfile: PropTypes.func,
+  profileErrorMessage: PropTypes.string,
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  profileErrorMessage: state.profile.profileErrorMessage,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   updateProfile: (idToken, profile) => dispatch(ProfileActions.updateProfile(idToken, profile)),

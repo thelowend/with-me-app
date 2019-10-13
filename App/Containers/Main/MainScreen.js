@@ -33,7 +33,7 @@ class MainScreen extends React.Component {
                   {'User profile: '}
                   {this.props.user.user_metadata.role}
                 </Text>
-                {this.props.user.user_metadata.profileCompleted ? (
+                {this.props.user.user_metadata.profile_complete ? (
                   <View>
                     {this.isHelper(this.props.user.user_metadata.role) ? (
                       <MainHelperScreen />

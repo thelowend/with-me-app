@@ -3,7 +3,7 @@ import { UserTypes } from '../Stores/User/Actions'
 import { StartupTypes } from '../Stores/Startup/Actions'
 import { AuthTypes } from '../Stores/Auth/Actions'
 import { ProfileTypes } from '../Stores/Profile/Actions'
-import { fetchUser } from './UserSaga'
+import { fetchUser, updateUserValue } from './UserSaga'
 import { updateProfile } from './ProfileSaga'
 import { startup } from './StartupSaga'
 import { login, logout } from './AuthSaga'
@@ -17,6 +17,8 @@ export default function* root() {
     takeLatest(StartupTypes.STARTUP, startup),
     // Call `fetchUser()` when a `FETCH_USER` action is triggered
     takeLatest(UserTypes.FETCH_USER, fetchUser),
+
+    takeLatest(UserTypes.UPDATE_USER_VALUE, updateUserValue),
 
     takeLatest(ProfileTypes.UPDATE_PROFILE, updateProfile),
 

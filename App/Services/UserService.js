@@ -36,8 +36,9 @@ function fetchUser(idToken) {
     })
 }
 function updateProfile(payload) {
+  const updatedMetadata = Object.assign(payload.profile, { profile_complete: true })
   return userApiClient
-    .put(`user/${payload.id}`, { user_metadata: payload.profile })
+    .put(`user/${payload.id}`, { user_metadata: updatedMetadata })
     .then((response) => {
       if (in200s(response.status)) {
         console.log('User: ', response.data)

@@ -2,6 +2,11 @@ import { INITIAL_STATE } from './InitialState'
 import { createReducer } from 'reduxsauce'
 import { UserTypes } from './Actions'
 
+export const updateUserValue = (state, { user }) => ({
+  ...state,
+  user: user,
+})
+
 export const fetchUserLoading = (state) => ({
   ...state,
   userIsLoading: true,
@@ -23,6 +28,7 @@ export const fetchUserFailure = (state, { errorMessage }) => ({
 })
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [UserTypes.UPDATE_USER_VALUE]: updateUserValue,
   [UserTypes.FETCH_USER_LOADING]: fetchUserLoading,
   [UserTypes.FETCH_USER_SUCCESS]: fetchUserSuccess,
   [UserTypes.FETCH_USER_FAILURE]: fetchUserFailure,

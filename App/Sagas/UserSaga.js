@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects'
-import UserActions from 'App/Stores/User/Actions'
-import { userService } from 'App/Services/UserService'
-import AuthActions from 'App/Stores/Auth/Actions'
+import UserActions from '../Stores/User/Actions'
+import { userService } from '../Services/UserService'
+import AuthActions from '../Stores/Auth/Actions'
 
 export function* fetchUser(payload) {
   yield put(UserActions.fetchUserLoading())
@@ -13,4 +13,9 @@ export function* fetchUser(payload) {
     yield put(UserActions.fetchUserFailure('There was an error while fetching user information.'))
     yield put(AuthActions.logout())
   }
+}
+
+export function* updateUserValue(payload) {
+  debugger;
+  yield put(UserActions.updateUserValue(payload))
 }
