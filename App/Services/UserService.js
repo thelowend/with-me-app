@@ -37,7 +37,6 @@ function fetchUser(idToken) {
 }
 
 function updateProfile(idToken, profile) {
-  debugger;
   const id = jwt(idToken).sub.split('|')[1]
   return userApiClient
     .put(`user/${id}`)

@@ -6,12 +6,9 @@ export function* updateProfile(payload) {
   yield put(ProfileActions.updateProfileLoading())
 
   const res = yield call(userService.updateProfile, payload.idToken, payload.profile)
-  debugger;
   if (!res.isAxiosError) {
     yield put(ProfileActions.updateProfileSuccess())
-    debugger;
   } else {
     yield put(ProfileActions.updateProfileFailure())
-    debugger;
   }
 }
