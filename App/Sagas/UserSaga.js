@@ -16,6 +16,5 @@ export function* fetchUser(payload) {
 }
 
 export function* updateUserValue(payload) {
-  debugger;
   yield put(UserActions.updateUserValue(payload))
 }

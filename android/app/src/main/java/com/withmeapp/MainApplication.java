@@ -3,6 +3,7 @@ package com.withmeapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.auth0.react.A0Auth0Package;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactSliderPackage(),
             new ReactNativeOneSignalPackage(),
             new A0Auth0Package(),
             new RNGestureHandlerPackage()

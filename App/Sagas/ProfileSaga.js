@@ -7,7 +7,6 @@ import NavigationService from '../Services/NavigationService'
 export function* updateProfile(payload) {
   const res = yield call(userService.updateProfile, payload)
   if (!res.isAxiosError) {
-    debugger;
     UserActions.updateUserValue(res)
     yield put(ProfileActions.updateProfileSuccess())
     NavigationService.navigateAndReset('MainScreen')
