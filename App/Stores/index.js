@@ -4,6 +4,7 @@ import rootSaga from 'App/Sagas'
 import { reducer as UserReducer } from './User/Reducers'
 import { reducer as AuthReducer } from './Auth/Reducers'
 import { reducer as ProfileReducer } from './Profile/Reducers'
+import { reducer as EvaluationReducer } from './Evaluation/Reducers'
 
 export default () => {
   const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ export default () => {
     user: UserReducer,
     auth: AuthReducer,
     profile: ProfileReducer,
+    evaluation: EvaluationReducer,
   })
 
   return configureStore(rootReducer, rootSaga)

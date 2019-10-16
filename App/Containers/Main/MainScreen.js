@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, Image } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import { Text, View, Button } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'

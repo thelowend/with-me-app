@@ -35,6 +35,7 @@ function fetchUser(idToken) {
       return error
     })
 }
+
 function updateProfile(payload) {
   const updatedMetadata = Object.assign(payload.profile, { profile_complete: true })
   return userApiClient
@@ -51,7 +52,23 @@ function updateProfile(payload) {
     })
 }
 
+function sendEvaluation(id, evaluation) {
+  return userApiClient
+    .put(`${id}/evaluation`, { evaluation: evaluation })
+    .then((response) => {
+      if (in200s(response.status)) {
+        console.log('User: ', response.data)
+        return response.data
+      }
+      return null
+    })
+    .catch((error) => {
+      return error
+    })
+}
+
 export const userService = {
   fetchUser,
   updateProfile,
+  sendEvaluation,
 }
