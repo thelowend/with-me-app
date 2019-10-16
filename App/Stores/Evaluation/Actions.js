@@ -5,7 +5,7 @@ const { Types, Creators } = createActions({
   fetchTestLoading: null,
   fetchTestSuccess: ['test'],
   fetchTestFailure: ['errorMessage'],
-  sendEvaluation: ['id', 'evaluation'],
+  sendEvaluation: ['id', 'ageCategory', 'evaluation'],
   sendEvaluationSuccess: [],
   sendEvaluationFailure: ['errorMessage'],
 })

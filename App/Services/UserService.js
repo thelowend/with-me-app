@@ -52,9 +52,9 @@ function updateProfile(payload) {
     })
 }
 
-function sendEvaluation(id, evaluation) {
+function sendEvaluation(id, category, evaluation) {
   return userApiClient
-    .put(`${id}/evaluation`, { evaluation: evaluation })
+    .put(`user/${id}/evaluation/${category}`, { evaluation: evaluation })
     .then((response) => {
       if (in200s(response.status)) {
         console.log('User: ', response.data)

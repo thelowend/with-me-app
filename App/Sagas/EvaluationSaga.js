@@ -16,7 +16,12 @@ export function* fetchTest(payload) {
 }
 
 export function* sendEvaluation(payload) {
-  const user = yield call(userService.sendEvaluation, payload.id, payload.evaluation)
+  const user = yield call(
+    userService.sendEvaluation,
+    payload.id,
+    payload.ageCategory,
+    payload.evaluation
+  )
   if (!user.isAxiosError) {
     yield put(EvaluationActions.sendEvaluationSuccess())
     UserActions.updateUserValue(user)

@@ -15,7 +15,11 @@ class EvaluationScreen extends React.Component {
     this.props.fetchTest(this.props.user.user_metadata.age_category)
   }
   _sendEvaluation(evaluation) {
-    this.props.sendEvaluation(this.props.user._id, evaluation)
+    this.props.sendEvaluation(
+      this.props.user._id,
+      this.props.user.user_metadata.age_category,
+      evaluation
+    )
   }
   render() {
     return (
@@ -48,7 +52,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchTest: (ageCategory) => dispatch(EvaluationActions.fetchTest(ageCategory)),
-  sendEvaluation: (id, evaluation) => dispatch(EvaluationActions.sendEvaluation(id, evaluation)),
+  sendEvaluation: (id, category, evaluation) =>
+    dispatch(EvaluationActions.sendEvaluation(id, category, evaluation)),
 })
 
 export default connect(
