@@ -1,9 +1,10 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import Style from './ProfileScreenStyle'
 import UserForm from './UserForm/UserForm'
+import HelperForm from './HelperForm/HelperForm'
 
 class ProfileScreen extends React.Component {
   componentDidMount() {}
@@ -14,9 +15,7 @@ class ProfileScreen extends React.Component {
         {this.props.user.user_metadata.role === 'user' ? (
           <UserForm profile={this.props.user} />
         ) : (
-          <View>
-            <Text>HELPER</Text>
-          </View>
+          <HelperForm profile={this.props.user} />
         )}
       </View>
     )

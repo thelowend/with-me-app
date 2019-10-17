@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import Colors from 'App/Theme/Colors'
 import Fonts from 'App/Theme/Fonts'
 import ApplicationStyles from 'App/Theme/ApplicationStyles'
 
@@ -49,5 +50,15 @@ export default StyleSheet.create({
   logo: {
     width: '100%',
     height: '100%',
+  },
+  submitModal: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+  },
+  submitModalTitle: {
+    ...Fonts.style.h3,
+  },
+  submitModalTextArea: {
+    margin: 5,
   },
 })

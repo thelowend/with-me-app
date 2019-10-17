@@ -4,7 +4,7 @@ import { StartupTypes } from '../Stores/Startup/Actions'
 import { AuthTypes } from '../Stores/Auth/Actions'
 import { ProfileTypes } from '../Stores/Profile/Actions'
 import { EvaluationTypes } from '../Stores/Evaluation/Actions'
-import { fetchUser, updateUserValue } from './UserSaga'
+import { fetchUser, updateUserValue, sendSocialMediaPost, syncWithFb } from './UserSaga'
 import { fetchTest, sendEvaluation } from './EvaluationSaga'
 import { updateProfile } from './ProfileSaga'
 import { startup } from './StartupSaga'
@@ -17,16 +17,14 @@ export default function* root() {
      */
     // Run the startup saga when the application starts
     takeLatest(StartupTypes.STARTUP, startup),
-    // Call `fetchUser()` when a `FETCH_USER` action is triggered
 
     takeLatest(UserTypes.FETCH_USER, fetchUser),
-
     takeLatest(UserTypes.UPDATE_USER_VALUE, updateUserValue),
+    takeLatest(UserTypes.SEND_SOCIAL_MEDIA_POST, sendSocialMediaPost),
+    takeLatest(UserTypes.SYNC_WITH_FB, syncWithFb),
 
     takeLatest(EvaluationTypes.FETCH_TEST, fetchTest),
     takeLatest(EvaluationTypes.SEND_EVALUATION, sendEvaluation),
-
-    takeLatest(ProfileTypes.UPDATE_PROFILE, updateProfile),
 
     takeLatest(ProfileTypes.UPDATE_PROFILE, updateProfile),
 

@@ -67,8 +67,58 @@ function sendEvaluation(id, category, evaluation) {
     })
 }
 
+function syncWithFB(id, fbId) {
+  return userApiClient
+    .put(`user/${id}`, { fb_id: fbId, fb_sync: true })
+    .then((response) => {
+      if (in200s(response.status)) {
+        console.log('User: ', response.data)
+        return response.data
+      }
+      return null
+    })
+    .catch((error) => {
+      return error
+    })
+}
+
+function sendSocialMediaPost(id, target, post) {
+  const payload = {
+    object: 'user',
+    entry: [
+      {
+        id: id,
+        uid: id,
+        time: Math.round(new Date().getTime() / 1000),
+        changes: [
+          {
+            field: 'status',
+            id: '44444444_444444444',
+            value: post,
+          },
+        ],
+      },
+    ],
+  }
+
+  return userApiClient
+    .post(`user/${id}/social/${target}`, { post: payload })
+    .then((response) => {
+      if (in200s(response.status)) {
+        console.log('FB POST: ', response.data)
+        return response.data
+      }
+      return null
+    })
+    .catch((error) => {
+      return error
+    })
+}
+
 export const userService = {
   fetchUser,
   updateProfile,
+  syncWithFB,
   sendEvaluation,
+  sendSocialMediaPost,
 }

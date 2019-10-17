@@ -3,6 +3,7 @@ import { userService } from '../Services/UserService'
 import UserActions from '../Stores/User/Actions'
 import { evaluationService } from '../Services/EvaluationService'
 import EvaluationActions from '../Stores/Evaluation/Actions'
+import NavigationService from 'App/Services/NavigationService'
 
 export function* fetchTest(payload) {
   yield put(EvaluationActions.fetchTestLoading())
@@ -25,6 +26,7 @@ export function* sendEvaluation(payload) {
   if (!user.isAxiosError) {
     yield put(EvaluationActions.sendEvaluationSuccess())
     UserActions.updateUserValue(user)
+    NavigationService.navigateAndReset('MainScreen')
   } else {
     yield put(
       EvaluationActions.sendEvaluationFailure('There was an error while sending the evaluation.')
