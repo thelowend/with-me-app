@@ -15,18 +15,41 @@ export default StyleSheet.create({
   },
   appHeader: {
     backgroundColor: Colors.primary,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   appHeaderuser: {
     backgroundColor: Colors.primary,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   appHeaderhelper: {
     backgroundColor: Colors.complementDark,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   appHeaderTitle: {
     marginLeft: 10,
+    textShadowColor: Colors.primaryDarker,
+    textShadowRadius: 1,
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+  },
+  warningCard: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    backgroundColor: Colors.complementDark,
+    padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  warningCardIcon: {
+    paddingLeft: 5,
+    paddingRight: 10,
+    width: '10%',
+  },
+  warningCardText: {
+    width: '90%',
   },
   commonButton: {
     marginTop: 10,
@@ -48,17 +71,26 @@ export default StyleSheet.create({
     padding: 10,
     width: '75%',
     alignSelf: 'center',
-    backgroundColor: Colors.complementLighter,
+    backgroundColor: Colors.primary,
   },
   TWSection: {
     padding: 10,
     width: '75%',
     alignSelf: 'center',
-    backgroundColor: Colors.complementLighter,
+    backgroundColor: Colors.primary,
   },
   SectionHeader: {
-    backgroundColor: Colors.complementLighter,
+    backgroundColor: Colors.white,
+    padding: 0,
+  },
+  SectionHeaderText: {
     color: Colors.white,
+    textShadowColor: Colors.primaryDarker,
+    textShadowRadius: 1,
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
   },
   FBButton: {
     backgroundColor: Colors.facebook,
@@ -76,7 +108,6 @@ export default StyleSheet.create({
   },
   userScreenContainer: {
     flex: 1,
-    margin: 10,
   },
   title: {
     ...Fonts.style.h2,

@@ -6,52 +6,44 @@ import Colors from 'App/Theme/Colors'
 export default StyleSheet.create({
   container: {
     ...ApplicationStyles.screen.container,
-    margin: 30,
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    padding: 10,
   },
   title: {
     ...Fonts.style.h2,
     textAlign: 'center',
     marginBottom: 10,
   },
-  text: {
-    ...Fonts.style.normal,
+  subTitle: {
+    ...Fonts.style.h3,
     textAlign: 'center',
     marginBottom: 5,
+    color: Colors.white,
+    textShadowColor: Colors.primary,
+    textShadowRadius: 2,
+    textShadowOffset: {
+      width: 2,
+      height: 2,
+    },
   },
-  instructions: {
-    ...Fonts.style.normal,
-    textAlign: 'center',
-    marginBottom: 5,
-    fontStyle: 'italic',
+  profileCard: {
+    backgroundColor: Colors.white,
+    padding: 10,
   },
-  loading: {
-    ...Fonts.style.normal,
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  result: {
-    ...Fonts.style.normal,
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  error: {
-    ...Fonts.style.normal,
-    textAlign: 'center',
-    marginBottom: 5,
-    color: 'red',
-  },
-  logoContainer: {
-    width: '100%',
-    height: 300,
-    marginBottom: 25,
-  },
-  logo: {
-    width: '100%',
-    height: '100%',
+  commonButton: {
+    backgroundColor: Colors.primary,
+    justifyContent: 'center',
+    width: '45%',
   },
   goBackButton: {
-    color: Colors.error,
+    backgroundColor: Colors.error,
+    justifyContent: 'center',
+    width: '45%',
+  },
+  buttonNavigation: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
 })

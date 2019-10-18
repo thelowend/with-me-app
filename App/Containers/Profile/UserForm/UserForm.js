@@ -1,9 +1,11 @@
 import React from 'react'
-import { View, Button, Text } from 'react-native'
+import { View, Button, Text, Icon } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import ProfileActions from 'App/Stores/Profile/Actions'
 import t from 'tcomb-form-native'
+import Style from '../ProfileScreenStyle'
+import NavigationService from 'App/Services/NavigationService'
 
 const Form = t.form.Form
 
@@ -28,18 +30,11 @@ const options = {
 }
 
 class UserForm extends React.Component {
-  componentDidMount() {}
-
-  onChange(value) {
-    // this.setState({ this.props.profile })
-  }
   handleValidation(values) {
     return true
   }
-
   handleSubmit() {
     const value = this._form.getValue() // use that ref to get the form value
-    console.log('value: ', value)
     if (value && this.handleValidation(value)) {
       this.props.updateProfile(
         this.props.profile._id,
@@ -53,7 +48,7 @@ class UserForm extends React.Component {
   render() {
     return (
       <View>
-        <Text>Profile:</Text>
+        <Text style={Style.subTitle}>User Profile</Text>
         <Form
           type={User}
           ref={(c) => {
@@ -61,10 +56,28 @@ class UserForm extends React.Component {
           }}
           options={options}
           value={this.props.profile.user_metadata}
-          onChange={this.onChange.bind(this)}
         />
-        <Button title="Submit" onPress={this.handleSubmit.bind(this)} />
         {this.props.profileErrorMessage ? <Text>{this.props.profileErrorMessage}</Text> : null}
+        <View style={Style.buttonNavigation}>
+          <Button
+            style={Style.goBackButton}
+            rounded
+            iconLeft
+            onPress={() => NavigationService.navigate('MainScreen')}
+          >
+            <Icon name="arrow-back" />
+            <Text>Back</Text>
+          </Button>
+          <Button
+            style={Style.commonButton}
+            rounded
+            iconRight
+            onPress={this.handleSubmit.bind(this)}
+          >
+            <Text>Submit</Text>
+            <Icon name="arrow-forward" />
+          </Button>
+        </View>
       </View>
     )
   }

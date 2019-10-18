@@ -71,12 +71,20 @@ class MainUserScreen extends React.Component {
   render() {
     return (
       <View>
+        {!this.props.user.email_verified ? (
+          <Card style={Style.warningCard}>
+            <Icon name="warning" style={Style.warningCardIcon} />
+            <Text style={Style.warningCardText}>Your email has not been verified yet. Please check your messages.</Text>
+          </Card>
+        ) : null}
         <Text style={Style.text}>Welcome {this.props.user.user_metadata.name}!</Text>
         {!this.props.user.user_metadata.threshold ? (
           <TakeTest />
         ) : (
           <View style={Style.userScreenContainer}>
-            <Text style={Style.subTitle}>Your latest evaluation: {this.props.user.user_metadata.threshold}</Text>
+            <Text style={Style.subTitle}>
+              Your latest evaluation: {this.props.user.user_metadata.threshold}
+            </Text>
             <Button
               rounded
               iconLeft
@@ -88,7 +96,7 @@ class MainUserScreen extends React.Component {
             </Button>
             <Card style={Style.FBSection}>
               <CardItem header style={Style.SectionHeader}>
-                <Text>Facebook Integration</Text>
+                <Text style={Style.SectionHeaderText}>Facebook Integration</Text>
               </CardItem>
               {this.props.user.fb_sync ? (
                 <View>
@@ -99,7 +107,7 @@ class MainUserScreen extends React.Component {
                     style={Style.FBButton}
                   >
                     <Icon name="sync" style={Style.iconUnSync} />
-                    <Text>Un-Sync</Text>
+                    <Text>Synced</Text>
                   </Button>
                   <Button
                     iconLeft
@@ -124,7 +132,7 @@ class MainUserScreen extends React.Component {
             </Card>
             <Card style={Style.TWSection}>
               <CardItem header style={Style.SectionHeader}>
-                <Text>Twitter Integration</Text>
+                <Text style={Style.SectionHeaderText}>Twitter Integration</Text>
               </CardItem>
               {this.props.user.tw_sync ? (
                 <View>
@@ -135,7 +143,7 @@ class MainUserScreen extends React.Component {
                     style={Style.TWButton}
                   >
                     <Icon name="sync" style={Style.iconUnSync} />
-                    <Text>Un-Sync</Text>
+                    <Text>Synced</Text>
                   </Button>
                   <Button
                     iconLeft

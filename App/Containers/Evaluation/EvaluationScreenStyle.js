@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native'
 import ApplicationStyles from 'App/Theme/ApplicationStyles'
+import Fonts from 'App/Theme/Fonts'
+import Colors from 'App/Theme/Colors'
 
 export default StyleSheet.create({
   container: {
@@ -7,15 +9,27 @@ export default StyleSheet.create({
     flex: 1,
   },
   evaluationTestContainer: {
-    margin: 30,
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  itemsContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignContent: 'center',
+  evaluationTestTop: {
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  evaluationTestItems: {
+    flex: 1,
+  },
+  evaluationTestBottom: {
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
+  testScrollView: {
+    flex: 1,
+    padding: 10,
+    marginBottom: 20,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderRadius: 10,
   },
   sliderContainer: {
     flexDirection: 'row',
@@ -25,7 +39,7 @@ export default StyleSheet.create({
     marginBottom: 15,
   },
   sliderLabel: {
-    flex: 4,
+    flex: 3,
   },
   slider: {
     flex: 3,
@@ -33,5 +47,23 @@ export default StyleSheet.create({
   sliderValue: {
     flex: 2,
     justifyContent: 'flex-end',
+  },
+  testOpening: {
+    ...Fonts.style.aboveAverage,
+    color: Colors.primary,
+  },
+  buttonNavigation: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  goBackButton: {
+    backgroundColor: Colors.error,
+    justifyContent: 'center',
+    width: '40%',
+  },
+  commonButton: {
+    backgroundColor: Colors.primary,
+    justifyContent: 'center',
+    width: '40%',
   },
 })

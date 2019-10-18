@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Button, Icon } from 'native-base'
+import { Text, View, Button, Icon, Card } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import Style from './MainScreenStyle'
@@ -28,6 +28,14 @@ class MaiHelperScreen extends React.Component {
   render() {
     return (
       <View>
+        {!this.props.user.email_verified ? (
+          <Card style={Style.warningCard}>
+            <Icon name="warning" style={Style.warningCardIcon} />
+            <Text style={Style.warningCardText}>
+              Your email has not been verified yet. Please check your messages.
+            </Text>
+          </Card>
+        ) : null}
         <Text style={Style.text}>Welcome {this.props.user.user_metadata.name}!</Text>
         <Button
           rounded
