@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Button, Textarea, Icon } from 'native-base'
+import { Text, View, Button, Textarea, Icon, Badge, Container, Card, CardItem } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import Style from './MainScreenStyle'
@@ -54,11 +54,19 @@ class MainUserScreen extends React.Component {
     this._sendSocialMediaPost()
     this._closeSubmitModal()
   }
-  _syncWithFB() {
-    this.props.syncWithFb(this.props.user._id, this.props.user._id) // Temporarily we use the same id for both
+  _syncWithFB(value) {
+    if (value) {
+      this.props.syncWithFb(this.props.user._id, this.props.user._id) // Temporarily we use the same id for both
+    } else {
+      this.props.unsyncWithFb(this.props.user._id, this.props.user._id)
+    }
   }
-  _syncWithTW() {
-    this.props.syncWithTw(this.props.user._id, this.props.user._id)
+  _syncWithTW(value) {
+    if (value) {
+      this.props.syncWithTw(this.props.user._id, this.props.user._id)
+    } else {
+      this.props.unsyncWithTw(this.props.user._id, this.props.user._id)
+    }
   }
   render() {
     return (
@@ -68,7 +76,7 @@ class MainUserScreen extends React.Component {
           <TakeTest />
         ) : (
           <View style={Style.userScreenContainer}>
-            <Text>Your latest evaluation: {this.props.user.user_metadata.threshold}</Text>
+            <Text style={Style.subTitle}>Your latest evaluation: {this.props.user.user_metadata.threshold}</Text>
             <Button
               rounded
               iconLeft
@@ -78,44 +86,73 @@ class MainUserScreen extends React.Component {
               <Icon name="person" />
               <Text>Update Profile</Text>
             </Button>
-            {this.props.user.fb_sync ? (
-              <View>
-                <Text>Synced with FB!</Text>
+            <Card style={Style.FBSection}>
+              <CardItem header style={Style.SectionHeader}>
+                <Text>Facebook Integration</Text>
+              </CardItem>
+              {this.props.user.fb_sync ? (
+                <View>
+                  <Button
+                    small
+                    iconLeft
+                    onPress={() => this._syncWithFB(false)}
+                    style={Style.FBButton}
+                  >
+                    <Icon name="sync" style={Style.iconUnSync} />
+                    <Text>Un-Sync</Text>
+                  </Button>
+                  <Button
+                    iconLeft
+                    onPress={() => this._openSubmitModal('Facebook')}
+                    style={Style.FBButton}
+                  >
+                    <Icon name="logo-facebook" />
+                    <Text>Post</Text>
+                  </Button>
+                </View>
+              ) : (
                 <Button
-                  rounded
+                  small
                   iconLeft
-                  onPress={() => this._openSubmitModal('Facebook')}
+                  onPress={() => this._syncWithFB(true)}
                   style={Style.FBButton}
                 >
-                  <Icon name="logo-facebook" />
-                  <Text>Post On Facebook</Text>
+                  <Icon name="sync" style={Style.iconSync} />
+                  <Text>Sync</Text>
                 </Button>
-              </View>
-            ) : (
-              <Button rounded iconLeft onPress={() => this._syncWithFB()} style={Style.FBButton}>
-                <Icon name="logo-facebook" />
-                <Text>Sync with Facebook</Text>
-              </Button>
-            )}
-            {this.props.user.tw_sync ? (
-              <View>
-                <Text>Synced with Twitter!</Text>
-                <Button
-                  rounded
-                  iconLeft
-                  onPress={() => this._openSubmitModal('Twitter')}
-                  style={Style.TWButton}
-                >
-                  <Icon name="logo-twitter" />
-                  <Text>Send Tweet</Text>
+              )}
+            </Card>
+            <Card style={Style.TWSection}>
+              <CardItem header style={Style.SectionHeader}>
+                <Text>Twitter Integration</Text>
+              </CardItem>
+              {this.props.user.tw_sync ? (
+                <View>
+                  <Button
+                    small
+                    iconLeft
+                    onPress={() => this._syncWithTW(false)}
+                    style={Style.TWButton}
+                  >
+                    <Icon name="sync" style={Style.iconUnSync} />
+                    <Text>Un-Sync</Text>
+                  </Button>
+                  <Button
+                    iconLeft
+                    onPress={() => this._openSubmitModal('Twitter')}
+                    style={Style.TWButton}
+                  >
+                    <Icon name="logo-twitter" />
+                    <Text>Tweet</Text>
+                  </Button>
+                </View>
+              ) : (
+                <Button small iconLeft onPress={() => this._syncWithTW(true)} style={Style.TWButton}>
+                  <Icon name="sync" style={Style.iconSync} />
+                  <Text>Sync</Text>
                 </Button>
-              </View>
-            ) : (
-              <Button rounded iconLeft onPress={() => this._syncWithTW()} style={Style.TWButton}>
-                <Icon name="logo-twitter" />
-                <Text>Sync with Twitter</Text>
-              </Button>
-            )}
+              )}
+            </Card>
             <Modal isVisible={this.state.modalIsVisible}>
               <View style={Style.submitModal}>
                 <Text style={Style.submitModalTitle}>Social Media Posting</Text>
@@ -154,15 +191,19 @@ MainUserScreen.propTypes = {
   user: PropTypes.object,
   sendSocialMediaPost: PropTypes.func,
   syncWithFb: PropTypes.func,
+  unsyncWithFb: PropTypes.func,
   syncWithTw: PropTypes.func,
+  unsyncWithTw: PropTypes.func,
 }
 const mapStateToProps = (state) => ({
   user: state.user.user,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  syncWithFb: (id, fbId) => dispatch(UserActions.syncWithFb(id, fbId)),
-  syncWithTw: (id, twId) => dispatch(UserActions.syncWithTw(id, twId)),
+  syncWithFb: (id, fbId) => dispatch(UserActions.syncWithFb(id, fbId, true)),
+  unsyncWithFb: (id, fbId) => dispatch(UserActions.syncWithFb(id, fbId, false)),
+  syncWithTw: (id, twId) => dispatch(UserActions.syncWithTw(id, twId, true)),
+  unsyncWithTw: (id, twId) => dispatch(UserActions.syncWithTw(id, twId, false)),
   sendSocialMediaPost: (id, target, post) =>
     dispatch(UserActions.sendSocialMediaPost(id, target, post)),
 })

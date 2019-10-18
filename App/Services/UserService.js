@@ -67,9 +67,9 @@ function sendEvaluation(id, category, evaluation) {
     })
 }
 
-function syncWithFB(id, fbId) {
+function syncWithFB(id, fbId, value) {
   return userApiClient
-    .put(`user/${id}`, { fb_id: fbId, fb_sync: true })
+    .put(`user/${id}`, { fb_id: fbId, fb_sync: value })
     .then((response) => {
       if (in200s(response.status)) {
         console.log('User: ', response.data)
@@ -82,9 +82,9 @@ function syncWithFB(id, fbId) {
     })
 }
 
-function syncWithTW(id, twId) {
+function syncWithTW(id, twId, value) {
   return userApiClient
-    .put(`user/${id}`, { tw_id: twId, tw_sync: true })
+    .put(`user/${id}`, { tw_id: twId, tw_sync: value })
     .then((response) => {
       if (in200s(response.status)) {
         console.log('User: ', response.data)

@@ -21,7 +21,7 @@ export function* updateUserValue(payload) {
 
 export function* syncWithFb(payload) {
   yield put(UserActions.syncWithFbLoading())
-  const user = yield call(userService.syncWithFB, payload.id, payload.fbId)
+  const user = yield call(userService.syncWithFB, payload.id, payload.fbId, payload.value)
   if (!user.isAxiosError) {
     yield put(UserActions.syncWithFbSuccess(user))
   } else {
@@ -31,7 +31,7 @@ export function* syncWithFb(payload) {
 
 export function* syncWithTw(payload) {
   yield put(UserActions.syncWithTwLoading())
-  const user = yield call(userService.syncWithTW, payload.id, payload.twId)
+  const user = yield call(userService.syncWithTW, payload.id, payload.twId, payload.value)
   if (!user.isAxiosError) {
     yield put(UserActions.syncWithTwSuccess(user))
   } else {
