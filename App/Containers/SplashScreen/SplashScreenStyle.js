@@ -8,7 +8,7 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignContent: 'stretch',
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.white,
   },
   splash: {
     width: 'auto',

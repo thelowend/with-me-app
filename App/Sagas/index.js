@@ -4,7 +4,14 @@ import { StartupTypes } from '../Stores/Startup/Actions'
 import { AuthTypes } from '../Stores/Auth/Actions'
 import { ProfileTypes } from '../Stores/Profile/Actions'
 import { EvaluationTypes } from '../Stores/Evaluation/Actions'
-import { fetchUser, updateUserValue, sendSocialMediaPost, syncWithFb } from './UserSaga'
+import {
+  fetchUser,
+  updateUserValue,
+  sendSocialMediaPost,
+  syncWithFb,
+  syncWithTw,
+  fetchContactInfo,
+} from './UserSaga'
 import { fetchTest, sendEvaluation } from './EvaluationSaga'
 import { updateProfile } from './ProfileSaga'
 import { startup } from './StartupSaga'
@@ -22,6 +29,8 @@ export default function* root() {
     takeLatest(UserTypes.UPDATE_USER_VALUE, updateUserValue),
     takeLatest(UserTypes.SEND_SOCIAL_MEDIA_POST, sendSocialMediaPost),
     takeLatest(UserTypes.SYNC_WITH_FB, syncWithFb),
+    takeLatest(UserTypes.SYNC_WITH_TW, syncWithTw),
+    takeLatest(UserTypes.FETCH_CONTACT_INFO, fetchContactInfo),
 
     takeLatest(EvaluationTypes.FETCH_TEST, fetchTest),
     takeLatest(EvaluationTypes.SEND_EVALUATION, sendEvaluation),

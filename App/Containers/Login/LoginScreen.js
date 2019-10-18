@@ -1,5 +1,7 @@
 import React from 'react'
-import { Text, View, Button } from 'react-native'
+import { View, Image } from 'react-native'
+import { Images } from 'App/Theme'
+import { Text, Button, Icon } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import AuthActions from 'App/Stores/Auth/Actions'
@@ -10,12 +12,20 @@ class LoginScreen extends React.Component {
     let loggedIn = this.props.loggedIn === true
     return (
       <View style={Style.container}>
-        <Text style={Style.header}> WithMeApp - Login </Text>
-        <Text>You are {loggedIn ? '' : 'not '} logged in . </Text>
-        <Button
-          onPress={loggedIn ? () => this._onLogout() : () => this._onLogin()}
-          title={loggedIn ? 'Log Out' : 'Log In'}
-        />
+        <View style={Style.loginTop}>
+          <Image style={Style.logo} source={Images.logoWhite} resizeMode={'contain'} />
+        </View>
+        <View style={Style.loginBottom}>
+          <Button
+            rounded
+            iconLeft
+            style={Style.loginButton}
+            onPress={loggedIn ? () => this._onLogout() : () => this._onLogin()}
+          >
+            <Icon name="log-in" />
+            <Text>{loggedIn ? 'Log Out' : 'Log In'}</Text>
+          </Button>
+        </View>
       </View>
     )
   }

@@ -1,6 +1,17 @@
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
-import { Text, View, Button } from 'native-base'
+import {
+  Container,
+  Header,
+  Text,
+  View,
+  Button,
+  Icon,
+  Body,
+  Right,
+  Title,
+  Content,
+} from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import UserActions from 'App/Stores/User/Actions'
@@ -11,46 +22,70 @@ import MainHelperScreen from './MainHelperScreen'
 import MainUserScreen from './MainUserScreen'
 
 class MainScreen extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      topText: '',
+    }
+  }
   componentDidMount() {
     this._fetchUser()
+  }
+  setTopText() {
+    let topText = ''
+    const values = {
+      helper: ' - Help others',
+      user: ' - Find help',
+    }
+    if (this.props.user.user_metadata) {
+      topText = values[this.props.user.user_metadata.role]
+    }
+    return topText
   }
   isHelper(profileType) {
     return profileType === 'helper'
   }
 
   render() {
+    let userRole = ''
+    if (this.props.user.user_metadata) {
+      userRole = this.props.user.user_metadata.role
+    }
     return (
       <View style={Style.container}>
-        {this.props.userIsLoading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <View>
-            {this.props.userErrorMessage ? (
-              <Text style={Style.error}>{this.props.userErrorMessage}</Text>
+        <Container>
+          <Header style={Style['appHeader' + userRole]}>
+            <Body>
+              <Title style={Style.appHeaderTitle}>WithMe{this.setTopText.bind(this)()}</Title>
+            </Body>
+            <Right>
+              <Button transparent onPress={() => this._onLogout()}>
+                <Icon name="log-out" />
+              </Button>
+            </Right>
+          </Header>
+          <Content>
+            {this.props.userIsLoading ? (
+              <ActivityIndicator size="large" color={Style.loader} />
             ) : (
               <View>
-                <Text style={Style.result}>
-                  {'User profile: '}
-                  {this.props.user.user_metadata.role}
-                </Text>
-                {this.props.user.user_metadata.profile_complete ? (
+                {this.props.userErrorMessage ? (
+                  <Text style={Style.error}>{this.props.userErrorMessage}</Text>
+                ) : (
                   <View>
-                    {this.isHelper(this.props.user.user_metadata.role) ? (
-                      <MainHelperScreen />
+                    {this.props.user.user_metadata.profile_complete ? (
+                      <View>
+                        {this.isHelper(userRole) ? <MainHelperScreen /> : <MainUserScreen />}
+                      </View>
                     ) : (
-                      <MainUserScreen />
+                      <CompleteProfile />
                     )}
                   </View>
-                ) : (
-                  <CompleteProfile />
                 )}
-                <Button onPress={() => this._onLogout()}>
-                  <Text>Log Out</Text>
-                </Button>
               </View>
             )}
-          </View>
-        )}
+          </Content>
+        </Container>
       </View>
     )
   }

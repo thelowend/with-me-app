@@ -82,6 +82,21 @@ function syncWithFB(id, fbId) {
     })
 }
 
+function syncWithTW(id, twId) {
+  return userApiClient
+    .put(`user/${id}`, { tw_id: twId, tw_sync: true })
+    .then((response) => {
+      if (in200s(response.status)) {
+        console.log('User: ', response.data)
+        return response.data
+      }
+      return null
+    })
+    .catch((error) => {
+      return error
+    })
+}
+
 function sendSocialMediaPost(id, target, post) {
   const payload = {
     object: 'user',
@@ -105,7 +120,22 @@ function sendSocialMediaPost(id, target, post) {
     .post(`user/${id}/social/${target}`, { post: payload })
     .then((response) => {
       if (in200s(response.status)) {
-        console.log('FB POST: ', response.data)
+        console.log('POST: ', response.data)
+        return response.data
+      }
+      return null
+    })
+    .catch((error) => {
+      return error
+    })
+}
+
+function fetchContactInfo(id) {
+  return userApiClient
+    .get(`user/${id}/contact`)
+    .then((response) => {
+      if (in200s(response.status)) {
+        console.log('Contact: ', response.data)
         return response.data
       }
       return null
@@ -119,6 +149,8 @@ export const userService = {
   fetchUser,
   updateProfile,
   syncWithFB,
+  syncWithTW,
   sendEvaluation,
   sendSocialMediaPost,
+  fetchContactInfo,
 }

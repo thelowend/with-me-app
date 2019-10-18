@@ -10,7 +10,14 @@ const { Types, Creators } = createActions({
   syncWithFbLoading: null,
   syncWithFbSuccess: ['user'],
   syncWithFbFailure: ['errorMessage'],
+  syncWithTw: ['id', 'twId'],
+  syncWithTwLoading: null,
+  syncWithTwSuccess: ['user'],
+  syncWithTwFailure: ['errorMessage'],
   sendSocialMediaPost: ['id', 'target', 'post'],
+  fetchContactInfo: ['id'],
+  fetchContactInfoSuccess: ['contact'],
+  fetchContactInfoFailure: ['errorMessage'],
 })
 
 export const UserTypes = Types

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Button, Textarea } from 'native-base'
+import { Text, View, Button, Textarea, Icon } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import Style from './MainScreenStyle'
@@ -7,6 +7,7 @@ import TakeTest from '../Popups/TakeTest'
 import Modal from 'react-native-modal'
 import OneSignal from 'react-native-onesignal'
 import UserActions from '../../Stores/User/Actions'
+import NavigationService from 'App/Services/NavigationService'
 
 class MainUserScreen extends React.Component {
   constructor(props) {
@@ -20,6 +21,9 @@ class MainUserScreen extends React.Component {
       modalType: null,
       modalInputText: '',
     }
+  }
+  _goToProfilePage() {
+    NavigationService.navigate('ProfileScreen')
   }
   _openSubmitModal(type) {
     this.setState({
@@ -53,6 +57,9 @@ class MainUserScreen extends React.Component {
   _syncWithFB() {
     this.props.syncWithFb(this.props.user._id, this.props.user._id) // Temporarily we use the same id for both
   }
+  _syncWithTW() {
+    this.props.syncWithTw(this.props.user._id, this.props.user._id)
+  }
   render() {
     return (
       <View>
@@ -60,18 +67,55 @@ class MainUserScreen extends React.Component {
         {!this.props.user.user_metadata.threshold ? (
           <TakeTest />
         ) : (
-          <View>
+          <View style={Style.userScreenContainer}>
             <Text>Your latest evaluation: {this.props.user.user_metadata.threshold}</Text>
+            <Button
+              rounded
+              iconLeft
+              onPress={this._goToProfilePage.bind(this)}
+              style={Style.commonButton}
+            >
+              <Icon name="person" />
+              <Text>Update Profile</Text>
+            </Button>
             {this.props.user.fb_sync ? (
-              <Text>Synced with FB!</Text>
+              <View>
+                <Text>Synced with FB!</Text>
+                <Button
+                  rounded
+                  iconLeft
+                  onPress={() => this._openSubmitModal('Facebook')}
+                  style={Style.FBButton}
+                >
+                  <Icon name="logo-facebook" />
+                  <Text>Post On Facebook</Text>
+                </Button>
+              </View>
             ) : (
-              <Button onPress={() => this._syncWithFB()}>
-                <Text>Sync with FB</Text>
+              <Button rounded iconLeft onPress={() => this._syncWithFB()} style={Style.FBButton}>
+                <Icon name="logo-facebook" />
+                <Text>Sync with Facebook</Text>
               </Button>
             )}
-            <Button onPress={() => this._openSubmitModal('Facebook')}>
-              <Text>Submit FB Post</Text>
-            </Button>
+            {this.props.user.tw_sync ? (
+              <View>
+                <Text>Synced with Twitter!</Text>
+                <Button
+                  rounded
+                  iconLeft
+                  onPress={() => this._openSubmitModal('Twitter')}
+                  style={Style.TWButton}
+                >
+                  <Icon name="logo-twitter" />
+                  <Text>Send Tweet</Text>
+                </Button>
+              </View>
+            ) : (
+              <Button rounded iconLeft onPress={() => this._syncWithTW()} style={Style.TWButton}>
+                <Icon name="logo-twitter" />
+                <Text>Sync with Twitter</Text>
+              </Button>
+            )}
             <Modal isVisible={this.state.modalIsVisible}>
               <View style={Style.submitModal}>
                 <Text style={Style.submitModalTitle}>Social Media Posting</Text>
@@ -83,10 +127,18 @@ class MainUserScreen extends React.Component {
                   value={this.state.modalInputText}
                   onChangeText={this._updateModalText.bind(this)}
                 />
-                <Button onPress={() => this._submit(this.state.modalType)}>
-                  <Text>Post to {this.state.modalType}</Text>
+                <Button
+                  style={Style.commonButton}
+                  rounded
+                  onPress={() => this._submit(this.state.modalType)}
+                >
+                  <Text>Send to {this.state.modalType}</Text>
                 </Button>
-                <Button onPress={this._closeSubmitModal.bind(this)}>
+                <Button
+                  rounded
+                  style={Style.buttonCloseSubmitModal}
+                  onPress={this._closeSubmitModal.bind(this)}
+                >
                   <Text>Close</Text>
                 </Button>
               </View>
@@ -102,6 +154,7 @@ MainUserScreen.propTypes = {
   user: PropTypes.object,
   sendSocialMediaPost: PropTypes.func,
   syncWithFb: PropTypes.func,
+  syncWithTw: PropTypes.func,
 }
 const mapStateToProps = (state) => ({
   user: state.user.user,
@@ -109,6 +162,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   syncWithFb: (id, fbId) => dispatch(UserActions.syncWithFb(id, fbId)),
+  syncWithTw: (id, twId) => dispatch(UserActions.syncWithTw(id, twId)),
   sendSocialMediaPost: (id, target, post) =>
     dispatch(UserActions.sendSocialMediaPost(id, target, post)),
 })

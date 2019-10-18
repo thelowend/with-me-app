@@ -6,9 +6,55 @@ import ApplicationStyles from 'App/Theme/ApplicationStyles'
 export default StyleSheet.create({
   container: {
     ...ApplicationStyles.screen.container,
-    margin: 30,
     flex: 1,
     justifyContent: 'center',
+  },
+  loader: {
+    ...ApplicationStyles.loader,
+    color: Colors.primary,
+  },
+  appHeader: {
+    backgroundColor: Colors.primary,
+    marginBottom: 20,
+  },
+  appHeaderuser: {
+    backgroundColor: Colors.primary,
+    marginBottom: 20,
+  },
+  appHeaderhelper: {
+    backgroundColor: Colors.complementDark,
+    marginBottom: 20,
+  },
+  appHeaderTitle: {
+    marginLeft: 10,
+  },
+  commonButton: {
+    marginTop: 20,
+    backgroundColor: Colors.primary,
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  commonButtonComp: {
+    marginTop: 20,
+    backgroundColor: Colors.complementDark,
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  FBButton: {
+    marginTop: 20,
+    backgroundColor: Colors.facebook,
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  TWButton: {
+    marginTop: 20,
+    backgroundColor: Colors.twitter,
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  userScreenContainer: {
+    flex: 1,
+    margin: 10,
   },
   title: {
     ...Fonts.style.h2,
@@ -52,13 +98,23 @@ export default StyleSheet.create({
     height: '100%',
   },
   submitModal: {
-    flex: 1,
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.white,
+    margin: 15,
+    borderRadius: 15,
   },
   submitModalTitle: {
     ...Fonts.style.h3,
+    textAlign: 'center',
+    marginTop: 10,
   },
   submitModalTextArea: {
     margin: 5,
+  },
+  buttonCloseSubmitModal: {
+    marginTop: 10,
+    marginBottom: 15,
+    backgroundColor: Colors.complement,
+    alignSelf: 'center',
+    alignItems: 'center',
   },
 })

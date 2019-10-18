@@ -2,6 +2,8 @@ const size = {
   h1: 38,
   h2: 34,
   h3: 30,
+  h4: 26,
+  big: 22,
   input: 18,
   regular: 17,
   medium: 14,
@@ -17,6 +19,12 @@ const style = {
   },
   h3: {
     fontSize: size.h3,
+  },
+  h4: {
+    fontSize: size.h4,
+  },
+  big: {
+    fontSize: size.big,
   },
   normal: {
     fontSize: size.regular,

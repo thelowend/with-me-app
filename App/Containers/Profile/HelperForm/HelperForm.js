@@ -64,7 +64,6 @@ class HelperForm extends React.Component {
           }}
           options={options}
           value={this.props.profile.user_metadata}
-          onChange={this.onChange.bind(this)}
         />
         <Button title="Submit" onPress={this.handleSubmit.bind(this)} />
         {this.props.profileErrorMessage ? <Text>{this.props.profileErrorMessage}</Text> : null}

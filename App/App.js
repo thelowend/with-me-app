@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/lib/integration/react'
 import createStore from 'App/Stores'
 import RootScreen from './Containers/Root/RootScreen'
 import SplashScreen from './Containers/SplashScreen/SplashScreen'
+import NavigationService from './Services/NavigationService'
 
 const { store, persistor } = createStore()
 
@@ -27,13 +28,16 @@ export default class App extends Component {
 
   onReceived(notification) {
     console.log('Notification received: ', notification)
+    // TODO: Link to contact user
   }
 
   onOpened(openResult) {
     console.log('Message: ', openResult.notification.payload.body)
-    console.log('Data: ', openResult.notification.payload.additionalData)
+    console.log('Data: ', openResult.notification.payload.additionalData) //Acá algo con el usuario: app_url 
     console.log('isActive: ', openResult.notification.isAppInFocus)
     console.log('openResult: ', openResult)
+    const data = openResult.notification.payload.additionalData
+    NavigationService.navigate('ContactScreen', { contact: data })
   }
 
   onIds(device) {

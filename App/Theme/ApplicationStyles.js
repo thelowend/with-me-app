@@ -10,4 +10,7 @@ export default {
       flex: 1,
     },
   },
+  loader: {
+    flex: 1,
+  },
 }

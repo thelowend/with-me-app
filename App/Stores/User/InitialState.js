@@ -4,4 +4,6 @@ export const INITIAL_STATE = {
   userErrorMessage: null,
   syncIsLoading: false,
   syncErrorMessage: null,
+  contactInfo: null,
+  contactInfoErrorMessage: null,
 }
