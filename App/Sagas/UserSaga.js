@@ -31,7 +31,7 @@ export function* syncWithFb(payload) {
 
 export function* syncWithTw(payload) {
   yield put(UserActions.syncWithTwLoading())
-  const user = yield call(userService.syncWithTW, payload.id, payload.fbId)
+  const user = yield call(userService.syncWithTW, payload.id, payload.twId)
   if (!user.isAxiosError) {
     yield put(UserActions.syncWithTwSuccess(user))
   } else {
