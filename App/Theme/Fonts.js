@@ -4,6 +4,7 @@ const size = {
   h3: 30,
   h4: 26,
   big: 22,
+  aboveAverage: 20,
   input: 18,
   regular: 17,
   medium: 14,
@@ -25,6 +26,9 @@ const style = {
   },
   big: {
     fontSize: size.big,
+  },
+  aboveAverage: {
+    fontSize: size.aboveAverage,
   },
   normal: {
     fontSize: size.regular,

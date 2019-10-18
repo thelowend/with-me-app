@@ -22,7 +22,7 @@ class ContactScreen extends React.Component {
     return (
       <View style={Style.container}>
         {!this.props.contact ? (
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color="#56ABE7" />
         ) : (
           <View style={Style.contactContainer}>
             <View>

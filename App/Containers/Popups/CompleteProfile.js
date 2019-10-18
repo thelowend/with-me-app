@@ -1,21 +1,35 @@
 import React from 'react'
-import { Text, View, Button } from 'native-base'
+import { Text, View, Button, Icon, Card, CardItem } from 'native-base'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import NavigationService from 'App/Services/NavigationService'
-import Style from 'App/Containers/Main/MainScreenStyle.js'
+import Style from './CompleteProfileStyle'
 
 class CompleteProfile extends React.Component {
   render() {
     return (
-      <View>
-        <Text style={Style.text}>
-          Thanks for using WithMe App! Before we continue, in order to help us help you please
-          complete your profile.
-        </Text>
-        <Button onPress={() => NavigationService.navigate('ProfileScreen')}>
-          <Text>Complete Profile Now</Text>
-        </Button>
+      <View style={Style.container}>
+        <Card bordered style={Style.card}>
+          <CardItem header style={Style.cardHeader}>
+            <Text style={Style.cardTitle}>Thank you for signing up to WithMeApp!</Text>
+          </CardItem>
+          <CardItem>
+            <Text style={Style.cardText}>
+              In order to help us help you better, please complete your profile.
+            </Text>
+          </CardItem>
+          <CardItem style={Style.cardButton}>
+            <Button
+              style={Style.completeProfileButton}
+              rounded
+              iconLeft
+              onPress={() => NavigationService.navigate('ProfileScreen')}
+            >
+              <Icon name="person" />
+              <Text>Complete Profile Now</Text>
+            </Button>
+          </CardItem>
+        </Card>
       </View>
     )
   }
