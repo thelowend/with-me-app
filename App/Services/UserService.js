@@ -108,7 +108,7 @@ function sendSocialMediaPost(id, target, post) {
         changes: [
           {
             field: 'status',
-            id: '44444444_444444444',
+            id: id,
             value: post,
           },
         ],

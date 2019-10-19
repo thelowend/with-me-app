@@ -32,10 +32,10 @@ export default class App extends Component {
   }
 
   onOpened(openResult) {
-    console.log('Message: ', openResult.notification.payload.body)
-    console.log('Data: ', openResult.notification.payload.additionalData) //Acá algo con el usuario: app_url 
-    console.log('isActive: ', openResult.notification.isAppInFocus)
-    console.log('openResult: ', openResult)
+    //console.log('Message: ', openResult.notification.payload.body)
+    //console.log('Data: ', openResult.notification.payload.additionalData)
+    //console.log('isActive: ', openResult.notification.isAppInFocus)
+    //console.log('openResult: ', openResult)
     const data = openResult.notification.payload.additionalData
     NavigationService.navigate('ContactScreen', { contact: data })
   }

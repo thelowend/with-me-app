@@ -42,7 +42,6 @@ class HelperForm extends React.Component {
 
   handleSubmit() {
     const value = this._form.getValue() // use that ref to get the form value
-    console.log('value: ', value)
     if (value && this.handleValidation(value)) {
       this.props.updateProfile(
         this.props.profile._id,
