@@ -11,9 +11,9 @@ export default StyleSheet.create({
     margin: 20,
   },
   takeTestButton: {
-    marginTop: 20,
+    alignSelf: 'center',
     backgroundColor: Colors.primary,
     justifyContent: 'center',
-    alignSelf: 'center',
+    marginTop: 20,
   },
 })

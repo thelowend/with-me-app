@@ -4,44 +4,50 @@ import Fonts from 'App/Theme/Fonts'
 import Colors from 'App/Theme/Colors'
 
 export default StyleSheet.create({
+  buttonNavigation: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  commonButton: {
+    backgroundColor: Colors.primary,
+    justifyContent: 'center',
+    width: '40%',
+  },
   container: {
     ...ApplicationStyles.screen.container,
     flex: 1,
   },
+  evaluationTestBottom: {
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
   evaluationTestContainer: {
     flex: 1,
-  },
-  evaluationTestTop: {
-    marginTop: 10,
-    marginBottom: 10,
-    alignSelf: 'center',
   },
   evaluationTestItems: {
     flex: 1,
   },
-  evaluationTestBottom: {
-    marginBottom: 20,
+  evaluationTestTop: {
     alignSelf: 'center',
+    marginBottom: 10,
+    marginTop: 10,
   },
-  testScrollView: {
-    flex: 1,
-    padding: 10,
-    marginBottom: 20,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderRadius: 10,
+  goBackButton: {
+    backgroundColor: Colors.error,
+    justifyContent: 'center',
+    width: '40%',
+  },
+  slider: {
+    flex: 3,
   },
   sliderContainer: {
+    alignContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    alignContent: 'center',
     marginBottom: 15,
   },
   sliderLabel: {
-    flex: 3,
-  },
-  slider: {
     flex: 3,
   },
   sliderValue: {
@@ -52,18 +58,12 @@ export default StyleSheet.create({
     ...Fonts.style.aboveAverage,
     color: Colors.primary,
   },
-  buttonNavigation: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  goBackButton: {
-    backgroundColor: Colors.error,
-    justifyContent: 'center',
-    width: '40%',
-  },
-  commonButton: {
-    backgroundColor: Colors.primary,
-    justifyContent: 'center',
-    width: '40%',
+  testScrollView: {
+    borderBottomWidth: 1,
+    borderRadius: 10,
+    borderTopWidth: 1,
+    flex: 1,
+    marginBottom: 20,
+    padding: 10,
   },
 })

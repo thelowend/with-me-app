@@ -56,7 +56,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(EvaluationActions.sendEvaluation(id, category, evaluation)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EvaluationScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(EvaluationScreen)
